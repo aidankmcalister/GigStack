@@ -4,12 +4,12 @@ import GigListingsCell from 'src/components/GigListingsCell'
 
 const HomePage = () => {
   return (
-    <>
+    <section className="mx-5">
       <Metadata title="Home" description="Home page" />
 
-      <h1>HomePage</h1>
+      <h1 className="mb-4 text-3xl">Open Gigs</h1>
       <GigListingsCell />
-    </>
+    </section>
   )
 }
 

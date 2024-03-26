@@ -16,7 +16,7 @@ const GigListingsList = ({ gigListings, notify }) => {
   return (
     <>
       {sortedGigListings.length > 0 ? (
-        <ul>
+        <ul className="space-y-3">
           {sortedGigListings.map((listing) => (
             <ListingItem key={listing.id} listing={listing} notify={notify} />
           ))}
@@ -30,25 +30,31 @@ const GigListingsList = ({ gigListings, notify }) => {
 
 export default GigListingsList
 
-const ListingItem = ({ listing, notify }) => {
-  const [popoutOpen, setPopoutOpen] = useState(false)
+const ListingItem = ({ listing }) => {
+  // const [popoutOpen, setPopoutOpen] = useState(false)
+
   return (
-    <li>
-      <EditListingPopout
-        listing={listing}
-        open={popoutOpen}
-        setOpen={setPopoutOpen}
-        notify={notify}
-      />
-      <p>{listing.title}</p>
-      <p>{format(addDays(new Date(listing.date), 1), 'PPPP')}</p>
-      <Button
+    <li className="border rounded-md shadow-md p-5 flex justify-between">
+      <div>
+        <p>{listing.title}</p>
+        <p>{format(addDays(new Date(listing.date), 1), 'PPPP')}</p>
+      </div>
+      <Button onClick={() => console.log(`attend ${listing.id}`)}>
+        Attend
+      </Button>
+      {/* <Button
         onClick={() => {
           setPopoutOpen(true)
         }}
       >
         Edit
       </Button>
+      <EditListingPopout
+        listing={listing}
+        open={popoutOpen}
+        setOpen={setPopoutOpen}
+        notify={notify}
+      /> */}
     </li>
   )
 }

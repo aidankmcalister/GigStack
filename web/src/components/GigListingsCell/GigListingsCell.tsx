@@ -47,13 +47,15 @@ export const Success = ({
   return (
     <>
       <Toaster />
-      <Button onClick={() => setPopoutOpen(true)}>Create New Listing</Button>
+      <Button className="mb-3" onClick={() => setPopoutOpen(true)}>
+        Create New Listing
+      </Button>
+      <GigListingsList notify={notify} gigListings={gigListings} />
       <NewListingPopout
         notify={notify}
         open={popoutOpen}
         setOpen={setPopoutOpen}
       />
-      <GigListingsList notify={notify} gigListings={gigListings} />
     </>
   )
 }

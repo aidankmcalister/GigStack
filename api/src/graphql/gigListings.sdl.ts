@@ -8,8 +8,8 @@ export const schema = gql`
   }
 
   type Query {
-    gigListings: [GigListing!]! @requireAuth
-    gigListing(id: String!): GigListing @requireAuth
+    gigListings: [GigListing!]! @skipAuth
+    gigListing(id: String!): GigListing @skipAuth
   }
 
   input CreateGigListingInput {

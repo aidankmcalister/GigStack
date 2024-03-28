@@ -6,10 +6,10 @@ export const standard = defineScenario<Prisma.GigListingCreateArgs>({
     one: {
       data: {
         title: 'String',
-        date: '2024-03-28T17:10:04.378Z',
+        date: '2024-03-28T17:45:06.362Z',
         creator: {
           create: {
-            email: 'String1511812',
+            email: 'String9036800',
             instrumentsPlayed: 'String',
             hashedPassword: 'String',
             salt: 'String',
@@ -20,10 +20,10 @@ export const standard = defineScenario<Prisma.GigListingCreateArgs>({
     two: {
       data: {
         title: 'String',
-        date: '2024-03-28T17:10:04.378Z',
+        date: '2024-03-28T17:45:06.362Z',
         creator: {
           create: {
-            email: 'String4548114',
+            email: 'String6255652',
             instrumentsPlayed: 'String',
             hashedPassword: 'String',
             salt: 'String',

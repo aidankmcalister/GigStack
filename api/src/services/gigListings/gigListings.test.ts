@@ -35,13 +35,13 @@ describe('gigListings', () => {
     const result = await createGigListing({
       input: {
         title: 'String',
-        date: '2024-03-28T17:10:04.364Z',
+        date: '2024-03-28T17:45:06.350Z',
         userId: scenario.gigListing.two.userId,
       },
     })
 
     expect(result.title).toEqual('String')
-    expect(result.date).toEqual(new Date('2024-03-28T17:10:04.364Z'))
+    expect(result.date).toEqual(new Date('2024-03-28T17:45:06.350Z'))
     expect(result.userId).toEqual(scenario.gigListing.two.userId)
   })
 

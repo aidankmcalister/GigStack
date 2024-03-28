@@ -1,3 +1,5 @@
+import { getCurrentUser } from 'api/src/lib/auth'
+
 import { Link, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
@@ -5,13 +7,12 @@ import { useAuth } from 'src/auth'
 import Button from '../Button/Button'
 
 const Header = () => {
-  const { isAuthenticated, userMetadata, logOut } = useAuth()
-
+  const { isAuthenticated, currentUser, logOut } = useAuth()
   return (
     <header>
       {isAuthenticated ? (
         <div>
-          <p>Welcome {JSON.stringify(userMetadata)}!</p>
+          <p>Welcome {JSON.stringify(currentUser.name)}!</p>
           <Button onClick={logOut}>Log Out</Button>
         </div>
       ) : (

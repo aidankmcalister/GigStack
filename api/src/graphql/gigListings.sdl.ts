@@ -5,21 +5,26 @@ export const schema = gql`
     date: DateTime!
     createdAt: DateTime!
     updatedAt: DateTime!
+    creator: User!
+    attendees: [User]!
+    userId: Int!
   }
 
   type Query {
-    gigListings: [GigListing!]! @skipAuth
-    gigListing(id: String!): GigListing @skipAuth
+    gigListings: [GigListing!]! @requireAuth
+    gigListing(id: String!): GigListing @requireAuth
   }
 
   input CreateGigListingInput {
     title: String!
     date: DateTime!
+    userId: Int!
   }
 
   input UpdateGigListingInput {
     title: String
     date: DateTime
+    userId: Int
   }
 
   type Mutation {

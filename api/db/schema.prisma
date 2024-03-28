@@ -14,20 +14,31 @@ generator client {
   binaryTargets = "native"
 }
 
+// GigListing model representing gig listings
+
 model GigListing {
   id        String   @id @default(cuid())
   title     String
   date      DateTime
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+  creator   User     @relation(name: "CreatedBy", fields: [userId], references: [id])
+  attendees User[]   @relation(name: "Attending")
+  userId    Int
 }
 
 model User {
-  id                  Int       @id @default(autoincrement())
+  id                  Int          @id @default(autoincrement())
   name                String?
-  email               String    @unique
+  email               String       @unique
+  avatar              String?
+  instrumentsPlayed   String[]
+  listingsCreated     GigListing[] @relation(name: "CreatedBy")
+  listingsAttending   GigListing[] @relation(name: "Attending")
   hashedPassword      String
   salt                String
   resetToken          String?
   resetTokenExpiresAt DateTime?
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @default(now())
 }

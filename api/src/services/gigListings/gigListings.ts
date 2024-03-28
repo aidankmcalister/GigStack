@@ -1,4 +1,8 @@
-import type { QueryResolvers, MutationResolvers } from 'types/graphql'
+import type {
+  QueryResolvers,
+  MutationResolvers,
+  GigListingRelationResolvers,
+} from 'types/graphql'
 
 import { db } from 'src/lib/db'
 
@@ -36,4 +40,13 @@ export const deleteGigListing: MutationResolvers['deleteGigListing'] = ({
   return db.gigListing.delete({
     where: { id },
   })
+}
+
+export const GigListing: GigListingRelationResolvers = {
+  creator: (_obj, { root }) => {
+    return db.gigListing.findUnique({ where: { id: root?.id } }).creator()
+  },
+  attendees: (_obj, { root }) => {
+    return db.gigListing.findUnique({ where: { id: root?.id } }).attendees()
+  },
 }

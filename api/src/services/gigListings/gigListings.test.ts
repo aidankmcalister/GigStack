@@ -31,13 +31,18 @@ describe('gigListings', () => {
     }
   )
 
-  scenario('creates a gigListing', async () => {
+  scenario('creates a gigListing', async (scenario: StandardScenario) => {
     const result = await createGigListing({
-      input: { title: 'String', date: '2024-03-26T19:25:32.041Z' },
+      input: {
+        title: 'String',
+        date: '2024-03-28T17:10:04.364Z',
+        userId: scenario.gigListing.two.userId,
+      },
     })
 
     expect(result.title).toEqual('String')
-    expect(result.date).toEqual(new Date('2024-03-26T19:25:32.041Z'))
+    expect(result.date).toEqual(new Date('2024-03-28T17:10:04.364Z'))
+    expect(result.userId).toEqual(scenario.gigListing.two.userId)
   })
 
   scenario('updates a gigListing', async (scenario: StandardScenario) => {

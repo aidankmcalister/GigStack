@@ -18,7 +18,7 @@ const GigListingsList = ({ gigListings, notify }) => {
       {sortedGigListings.length > 0 ? (
         <ul className="space-y-3">
           {sortedGigListings.map((listing) => (
-            <ListingItem key={listing.id} listing={listing} notify={notify} />
+            <ListingItem key={listing.id} listing={listing} />
           ))}
         </ul>
       ) : (
@@ -38,6 +38,7 @@ const ListingItem = ({ listing }) => {
       <div>
         <p>{listing.title}</p>
         <p>{format(addDays(new Date(listing.date), 1), 'PPPP')}</p>
+        <p>Created by {listing.creator.email}</p>
       </div>
       <Button onClick={() => console.log(`attend ${listing.id}`)}>
         Attend

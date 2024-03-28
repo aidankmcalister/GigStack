@@ -5,17 +5,22 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Form, Label, TextField, DateField } from '@redwoodjs/forms'
 import { useMutation } from '@redwoodjs/web'
 
+import { useAuth } from 'src/auth'
+
 export const CREATE_LISTING_MUTATION = gql`
   mutation CreatGigListingMutation($input: CreateGigListingInput!) {
     createGigListing(input: $input) {
       id
       title
       date
+      userId
     }
   }
 `
 
 const NewListingPopout = ({ open, setOpen, notify }) => {
+  const { currentUser } = useAuth()
+
   const [createGigListing, { loading }] = useMutation(CREATE_LISTING_MUTATION, {
     onCompleted: (data) => {
       notify({
@@ -36,6 +41,7 @@ const NewListingPopout = ({ open, setOpen, notify }) => {
       variables: {
         input: {
           ...values,
+          userId: currentUser.id,
         },
       },
     })

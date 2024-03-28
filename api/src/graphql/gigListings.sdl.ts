@@ -7,7 +7,7 @@ export const schema = gql`
     updatedAt: DateTime!
     creator: User!
     attendees: [User]!
-    userId: String!
+    userId: Int!
   }
 
   type Query {
@@ -18,13 +18,13 @@ export const schema = gql`
   input CreateGigListingInput {
     title: String!
     date: DateTime!
-    userId: String!
+    userId: Int!
   }
 
   input UpdateGigListingInput {
     title: String
     date: DateTime
-    userId: String
+    userId: Int
   }
 
   type Mutation {

@@ -9,8 +9,6 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
-import { useAuth } from 'src/auth'
-
 import Button from '../Button/Button'
 import GigListingsList from '../GigListingsList/GigListingsList'
 import NewListingPopout from '../NewListingPopout/NewListingPopout'
@@ -24,6 +22,11 @@ export const QUERY: TypedDocumentNode<
       id
       title
       date
+      creator {
+        name
+        email
+        avatar
+      }
     }
   }
 `
@@ -45,7 +48,6 @@ export const Success = ({
     const toastMethod = type ? toast[type] : toast
     toastMethod(message)
   }
-  const { userMetadata } = useAuth()
   return (
     <>
       <Toaster />
@@ -54,7 +56,6 @@ export const Success = ({
       </Button>
       <GigListingsList notify={notify} gigListings={gigListings} />
       <NewListingPopout
-        userId={userMetadata}
         notify={notify}
         open={popoutOpen}
         setOpen={setPopoutOpen}

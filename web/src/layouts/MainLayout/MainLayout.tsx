@@ -1,19 +1,13 @@
-import { useAuth } from 'src/auth'
-import Button from 'src/components/Button/Button'
+import Header from 'src/components/Header/Header'
 
 type MainLayoutProps = {
   children?: React.ReactNode
 }
 
 const MainLayout = ({ children }: MainLayoutProps) => {
-  const { isAuthenticated, userMetadata, logOut } = useAuth()
-
   return (
     <>
-      <header>
-        <p>Welcome {JSON.stringify(userMetadata)}!</p>
-        <Button onClick={logOut}>Log Out</Button>
-      </header>
+      <Header />
       <section>{children}</section>
       <footer>footer</footer>
     </>

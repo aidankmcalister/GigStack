@@ -13,6 +13,8 @@ export const QUERY: TypedDocumentNode<
   query FindUserQuery($id: Int!) {
     user: user(id: $id) {
       id
+      email
+      name
     }
   }
 `

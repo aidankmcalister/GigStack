@@ -16,6 +16,25 @@ export const gigListing: QueryResolvers['gigListing'] = ({ id }) => {
   })
 }
 
+export const gigListingsByUser = () => {
+  return db.gigListing.findMany({ where: { userId: context.currentUser.id } })
+}
+
+// export const gigListingsByUser = ({ id }) => {
+//   return db.gigListing.findUnique({
+//     where: { id },
+//     include: {
+//       creator: true,
+//     },
+//   })
+// }
+
+// export const gigListingsByUser: QueryResolvers['gigListing'] = ({ id }) => {
+//   return db.gigListing.findMany({
+//     where: { userId: id },
+//   })
+// }
+
 export const createGigListing: MutationResolvers['createGigListing'] = ({
   input,
 }) => {

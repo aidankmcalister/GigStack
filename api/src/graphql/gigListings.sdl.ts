@@ -13,6 +13,7 @@ export const schema = gql`
   type Query {
     gigListings: [GigListing!]! @requireAuth
     gigListing(id: String!): GigListing @requireAuth
+    gigListingsByUser: [GigListing!] @requireAuth
   }
 
   input CreateGigListingInput {

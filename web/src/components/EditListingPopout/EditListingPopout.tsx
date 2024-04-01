@@ -41,7 +41,7 @@ const EditListingPopout = ({ open, setOpen, notify, listing }) => {
       const errorMessage = `Failed to update gig listing: ${listing.title}`
       notify({ message: errorMessage, type: 'error' })
     },
-    refetchQueries: ['GigListingsQuery'],
+    refetchQueries: ['PostedGigsQuery'],
   })
 
   const [deleteGigListing, { data, error }] = useMutation(
@@ -58,7 +58,7 @@ const EditListingPopout = ({ open, setOpen, notify, listing }) => {
         const errorMessage = `Cannot delete ${listing.title}.`
         notify({ message: errorMessage, type: 'error' })
       },
-      refetchQueries: ['GigListingsQuery'],
+      refetchQueries: ['PostedGigsQuery'],
     }
   )
 

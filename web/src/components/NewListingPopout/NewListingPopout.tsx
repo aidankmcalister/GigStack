@@ -33,7 +33,7 @@ const NewListingPopout = ({ open, setOpen, notify }) => {
       const errorMessage = `Failed to create gig listing: ${error.message}`
       notify({ message: errorMessage, type: 'error' })
     },
-    refetchQueries: ['GigListingsQuery'],
+    refetchQueries: ['PostedGigsQuery'],
   })
 
   const handleSubmit = (values) => {

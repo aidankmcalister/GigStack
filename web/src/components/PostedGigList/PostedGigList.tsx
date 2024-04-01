@@ -31,7 +31,7 @@ const ListingItem = ({ listing, notify }) => {
   const [popoutOpen, setPopoutOpen] = useState(false)
 
   return (
-    <li className="flex justify-between rounded-md border p-5 shadow-md">
+    <li className="flex justify-between rounded-md border bg-main-white-brighter p-5 shadow-md">
       <div>
         <p className="text-xl font-medium">{listing.title}</p>
         <p className="">{format(addDays(new Date(listing.date), 1), 'PPPP')}</p>

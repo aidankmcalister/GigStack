@@ -12,7 +12,7 @@ const GigListingsList = ({ gigListings, notify }) => {
   return (
     <>
       {sortedGigListings.length > 0 ? (
-        <ul className="space-y-3">
+        <ul className="w-full space-y-3">
           {sortedGigListings.map((listing) => (
             <ListingItem key={listing.id} listing={listing} />
           ))}

@@ -55,15 +55,6 @@ export default function Example() {
           >
             Posted Gigs
           </Link>
-          {/* {navigation.map((item) => (
-            <Link
-              key={item.name}
-              to={item.to}
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              {item.name}
-            </Link>
-          ))} */}
         </div>
         {isAuthenticated ? (
           <div className="flex flex-1 items-center justify-end gap-x-6">
@@ -84,7 +75,7 @@ export default function Example() {
             </Link>
             <Link
               to={routes.signup()}
-              className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="rounded-md bg-main-orange px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Sign up
             </Link>
@@ -109,17 +100,19 @@ export default function Example() {
       >
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-main-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-          <div className="flex items-center gap-x-6">
+          <div className="flex items-center justify-between gap-x-6">
             <Link to={routes.home()} className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <MusicalNoteIcon className="h-8 w-auto text-main-orange" />
             </Link>
-            <Link
-              to={routes.signup()}
-              className="ml-auto rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Sign up
-            </Link>
+            {!isAuthenticated && (
+              <Link
+                to={routes.signup()}
+                className="ml-auto rounded-md bg-main-orange px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Sign up
+              </Link>
+            )}
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700"

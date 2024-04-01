@@ -48,15 +48,15 @@ const UserInfoForm = ({ user }) => {
     <div>
       <Form
         onSubmit={handleSubmit}
-        className="flex flex-col border p-5  w-96 space-y-6 rounded-md shadow-sm items-center"
+        className="flex w-96 flex-col items-center space-y-6  rounded-md border bg-main-white-brighter p-5 shadow-sm"
       >
         <img
           src={`https://robohash.org/${user.id}`}
           alt={user.email || user.name}
-          className="rounded-full w-20"
+          className="w-20 rounded-full"
         />
 
-        <div className="flex flex-col w-full">
+        <div className="flex w-full flex-col">
           <label htmlFor="name">Name:</label>
           <TextField
             className={`${textFieldClasses}`}
@@ -92,7 +92,7 @@ const UserInfoForm = ({ user }) => {
           />
         </div> */}
 
-        <div className="flex flex-col w-full">
+        <div className="flex w-full flex-col">
           <label htmlFor="email">Email:</label>
           <TextField
             className={`${textFieldClasses}`}
@@ -104,7 +104,7 @@ const UserInfoForm = ({ user }) => {
           />
         </div>
 
-        <button className="border rounded-md px-2 py-1" type="submit">
+        <button className="rounded-md border px-2 py-1" type="submit">
           Submit
         </button>
       </Form>

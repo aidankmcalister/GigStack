@@ -40,7 +40,7 @@ export const Success = ({
 }: CellSuccessProps<GigListingsQuery>) => {
   return (
     <>
-      <GigListingsList gigListings={gigListings} />
+      <GigListingsList gigListings={gigListings} notify={''} />
     </>
   )
 }

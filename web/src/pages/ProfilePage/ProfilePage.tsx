@@ -10,18 +10,16 @@ const ProfilePage = () => {
   const [renderUserCell, setRenderUserCell] = useState(false)
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    if (currentUser) {
       setRenderUserCell(true)
-    }, 1500)
-    return () => clearTimeout(timer)
-  }, [])
+    }
+  }, [currentUser])
 
   return (
     <>
       <Metadata title="Profile" description="Profile page" />
-      <section className="mx-auto w-[90%] flex flex-col items-center space-y-3">
+      <section className="mx-auto flex w-[90%] flex-col items-center space-y-3">
         <h1 className="text-2xl font-semibold">Profile</h1>
-        {/* <p>{JSON.stringify(currentUser)}</p> */}
         {renderUserCell && <UserCell id={currentUser.id} />}
       </section>
     </>

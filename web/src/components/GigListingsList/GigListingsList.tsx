@@ -1,7 +1,6 @@
 import { addDays, format } from 'date-fns'
 
 import Button from '../Button/Button'
-import EditListingPopout from '../EditListingPopout/EditListingPopout'
 
 const GigListingsList = ({ gigListings, notify }) => {
   const sortedGigListings = gigListings.slice().sort((a, b) => {
@@ -28,15 +27,12 @@ const GigListingsList = ({ gigListings, notify }) => {
 export default GigListingsList
 
 const ListingItem = ({ listing }) => {
-  // const [popoutOpen, setPopoutOpen] = useState(false)
-
   return (
-    <li className="flex justify-between rounded-md border p-5 shadow-md">
+    <li className="flex justify-between rounded-md border bg-main-white-brighter p-5 shadow-md">
       <div>
         <p className="text-xl font-medium">{listing.title}</p>
         <p className="">{format(addDays(new Date(listing.date), 1), 'PPPP')}</p>
-        {/* <p>{JSON.stringify(listing)}</p> */}
-        <div className="flex items-center space-x-2 text-gray-500/70">
+        <div className="flex items-center space-x-2 text-main-gray">
           <img
             src={`https://robohash.org/${listing.creator.id}`}
             alt={listing.creator.name}
@@ -46,19 +42,6 @@ const ListingItem = ({ listing }) => {
         </div>
       </div>
       <Button onClick={() => console.log(listing.id)}>Play Here</Button>
-      {/* <Button
-        onClick={() => {
-          setPopoutOpen(true)
-        }}
-      >
-        Edit
-      </Button>
-      <EditListingPopout
-        listing={listing}
-        open={popoutOpen}
-        setOpen={setPopoutOpen}
-        notify={notify}
-      /> */}
     </li>
   )
 }

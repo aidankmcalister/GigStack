@@ -1,3 +1,4 @@
+import Footer from 'src/components/Footer/Footer'
 import Header from 'src/components/Header/Header'
 
 type MainLayoutProps = {
@@ -6,10 +7,10 @@ type MainLayoutProps = {
 
 const MainLayout = ({ children }: MainLayoutProps) => {
   return (
-    <section className="overflow-x-auto">
+    <section className="overflow-x-auto bg-main-white">
       <Header />
       <section>{children}</section>
-      <footer>footer</footer>
+      <Footer />
     </section>
   )
 }

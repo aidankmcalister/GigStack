@@ -1,7 +1,4 @@
-import { useState } from 'react'
-
 import { addDays, format } from 'date-fns'
-import { enUS } from 'date-fns/locale'
 
 import Button from '../Button/Button'
 import EditListingPopout from '../EditListingPopout/EditListingPopout'
@@ -34,13 +31,23 @@ const ListingItem = ({ listing }) => {
   // const [popoutOpen, setPopoutOpen] = useState(false)
 
   return (
-    <li className="border rounded-md shadow-md p-5 flex justify-between">
+    <li className="flex justify-between rounded-md border p-5 shadow-md">
       <div>
-        <p>{listing.title}</p>
-        <p>{format(addDays(new Date(listing.date), 1), 'PPPP')}</p>
-        <p>Created by {listing.creator.email}</p>
+        <p className="text-xl font-medium">{listing.title}</p>
+        <p className="">{format(addDays(new Date(listing.date), 1), 'PPPP')}</p>
+        <div className="flex items-center space-x-2 text-gray-500/70">
+          <img
+            src={`https://robohash.org/${listing.creator.id}`}
+            alt={listing.creator.name}
+            className="w-7 rounded-full border"
+          />
+          <p>{listing.creator.name}</p>
+        </div>
       </div>
-      <Button onClick={() => console.log(`attend ${listing.id}`)}>
+      <Button
+        className="min-w-24"
+        onClick={() => console.log(`attend ${listing.id}`)}
+      >
         Attend
       </Button>
       {/* <Button

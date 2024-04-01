@@ -4,9 +4,9 @@ export const schema = gql`
     name: String
     email: String!
     avatar: String
-    instrumentsPlayed: [String]!
-    listingsCreated: [GigListing]!
-    listingsAttending: [GigListing]!
+    instrumentsPlayed: [String]
+    listingsCreated: [GigListing]
+    listingsAttending: [GigListing]
     hashedPassword: String!
     salt: String!
     resetToken: String
@@ -24,7 +24,7 @@ export const schema = gql`
     name: String
     email: String!
     avatar: String
-    instrumentsPlayed: [String]!
+    instrumentsPlayed: [String]
     hashedPassword: String!
     salt: String!
     resetToken: String
@@ -35,7 +35,7 @@ export const schema = gql`
     name: String
     email: String
     avatar: String
-    instrumentsPlayed: [String]!
+    instrumentsPlayed: [String]
     hashedPassword: String
     salt: String
     resetToken: String

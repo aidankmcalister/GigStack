@@ -6,6 +6,8 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
+import UserInfoForm from '../UserInfoForm/UserInfoForm'
+
 export const QUERY: TypedDocumentNode<
   FindUserQuery,
   FindUserQueryVariables
@@ -32,5 +34,9 @@ export const Failure = ({
 export const Success = ({
   user,
 }: CellSuccessProps<FindUserQuery, FindUserQueryVariables>) => {
-  return <div>{JSON.stringify(user)}</div>
+  return (
+    <div>
+      <UserInfoForm user={user} />
+    </div>
+  )
 }

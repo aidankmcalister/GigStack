@@ -23,6 +23,7 @@ export const QUERY: TypedDocumentNode<
       title
       date
       creator {
+        id
         name
         email
         avatar

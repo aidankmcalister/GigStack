@@ -12,7 +12,7 @@ const Header = () => {
     <header>
       {isAuthenticated ? (
         <div>
-          <p>Welcome {JSON.stringify(currentUser.name)}!</p>
+          {/* <p>Welcome {JSON.stringify(currentUser.name)}!</p> */}
           <Button onClick={logOut}>Log Out</Button>
         </div>
       ) : (

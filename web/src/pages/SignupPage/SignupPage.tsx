@@ -20,7 +20,7 @@ const SignupPage = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(routes.profile())
+      navigate(routes.home())
     }
   }, [isAuthenticated])
 

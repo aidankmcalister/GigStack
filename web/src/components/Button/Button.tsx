@@ -1,7 +1,7 @@
 const Button = ({ className = '', onClick, children }) => {
   return (
     <button
-      className={`border rounded-md px-2 py-1 ${className}`}
+      className={`rounded-md border px-2 py-1 ${className}`}
       onClick={onClick}
     >
       {children}

@@ -45,6 +45,7 @@ const ListingItem = ({ listing }) => {
           <p>{listing.creator.name}</p>
         </div>
       </div>
+      <Button onClick={() => console.log(listing.id)}>Play Here</Button>
       {/* <Button
         onClick={() => {
           setPopoutOpen(true)

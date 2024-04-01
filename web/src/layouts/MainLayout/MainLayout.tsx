@@ -6,11 +6,11 @@ type MainLayoutProps = {
 
 const MainLayout = ({ children }: MainLayoutProps) => {
   return (
-    <>
+    <section className="overflow-x-auto">
       <Header />
       <section>{children}</section>
       <footer>footer</footer>
-    </>
+    </section>
   )
 }
 

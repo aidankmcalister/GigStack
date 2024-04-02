@@ -1,3 +1,4 @@
+import { helix } from 'ldrs'
 import toast, { Toaster } from 'react-hot-toast'
 import type {
   AttendingGigsQuery,
@@ -34,9 +35,16 @@ export const QUERY: TypedDocumentNode<
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => {
+  helix.register()
+  return (
+    <div className="flex h-96 items-center justify-center">
+      <l-helix size="70" speed="2.5" color="#FF8811"></l-helix>
+    </div>
+  )
+}
 
-export const Empty = () => <div>Empty</div>
+// export const Empty = () => <div>Empty</div>
 
 export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error?.message}</div>

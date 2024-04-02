@@ -38,8 +38,8 @@ const dropdownOptions = [
 
 const NewListingPopout = ({ open, setOpen, notify }) => {
   const { currentUser } = useAuth()
-  const [selectedInstruments, setSelectedInstruments] = useState([]) // State for selected instruments
-  const [selectedDate, setSelectedDate] = useState(null) // State for selected date
+  const [selectedInstruments, setSelectedInstruments] = useState([])
+  const [selectedDate, setSelectedDate] = useState(null)
 
   const [createGigListing, { loading }] = useMutation(CREATE_LISTING_MUTATION, {
     onCompleted: (data) => {
@@ -48,8 +48,8 @@ const NewListingPopout = ({ open, setOpen, notify }) => {
         type: 'success',
       })
       setTimeout(() => setOpen(false), 0)
-      setSelectedInstruments([]) // Clear selected instruments
-      setSelectedDate(null) // Clear selected date
+      setSelectedInstruments([])
+      setSelectedDate(null)
     },
     onError: (error) => {
       const errorMessage = `Failed to create gig listing: ${error.message}`
@@ -67,7 +67,7 @@ const NewListingPopout = ({ open, setOpen, notify }) => {
           instrumentsWanted: selectedInstruments.map(
             (instrument) => instrument.value
           ),
-          date: selectedDate, // Include selected date in form submission
+          date: selectedDate,
         },
       },
     })

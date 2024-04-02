@@ -9,7 +9,9 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <section className="items-center overflow-x-auto bg-main-white">
       <Header />
-      <section className="flex min-h-screen justify-center">{children}</section>
+      <section className="flex min-h-screen flex-col items-center">
+        {children}
+      </section>
       <Footer />
     </section>
   )

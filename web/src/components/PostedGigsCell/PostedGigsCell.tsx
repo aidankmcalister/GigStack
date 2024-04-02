@@ -22,6 +22,7 @@ export const QUERY: TypedDocumentNode<
     gigListings: gigListingsByUser {
       id
       title
+      instrumentsWanted
       createdAt
       date
       creator {
@@ -52,7 +53,10 @@ export const Success = ({ gigListings }: CellSuccessProps<PostedGigsQuery>) => {
   return (
     <ul className="w-full">
       <Toaster />
-      <Button className="mb-3" onClick={() => setPopoutOpen(true)}>
+      <Button
+        className="mb-2 bg-main-white-brighter shadow-sm"
+        onClick={() => setPopoutOpen(true)}
+      >
         Create New Listing
       </Button>
       <PostedGigList gigListings={gigListings} notify={notify} />

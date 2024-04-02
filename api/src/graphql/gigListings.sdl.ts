@@ -5,6 +5,7 @@ export const schema = gql`
     date: DateTime!
     createdAt: DateTime!
     updatedAt: DateTime!
+    instrumentsWanted: [String]!
     creator: User!
     attendees: [User]!
     userId: Int!
@@ -19,12 +20,14 @@ export const schema = gql`
   input CreateGigListingInput {
     title: String!
     date: DateTime!
+    instrumentsWanted: [String]!
     userId: Int!
   }
 
   input UpdateGigListingInput {
     title: String
     date: DateTime
+    instrumentsWanted: [String]!
     userId: Int
   }
 

@@ -1,6 +1,7 @@
 import { addDays, format } from 'date-fns'
 
 import Button from '../Button/Button'
+import InstrumentChip from '../InstrumentChip/InstrumentChip'
 
 const GigListingsList = ({ gigListings, notify }) => {
   const sortedGigListings = gigListings.slice().sort((a, b) => {
@@ -30,18 +31,29 @@ const ListingItem = ({ listing }) => {
   return (
     <li className="flex justify-between rounded-md border bg-main-white-brighter p-5 shadow-md">
       <div>
-        <p className="text-xl font-medium">{listing.title}</p>
-        <p className="">{format(addDays(new Date(listing.date), 1), 'PPPP')}</p>
-        <div className="flex items-center space-x-2 text-main-gray">
-          <img
-            src={`https://robohash.org/${listing.creator.id}`}
-            alt={listing.creator.name}
-            className="w-7 rounded-full border"
-          />
-          <p>{listing.creator.name}</p>
+        <div className="flex items-center space-x-2">
+          <p className="text-xl font-medium">{listing.title}</p>
+          <div className="flex items-center space-x-2 text-main-gray">
+            <img
+              src={`https://robohash.org/${listing.creator.id}`}
+              alt={listing.creator.name}
+              className="w-7 rounded-full border"
+            />
+            <p>{listing.creator.name}</p>
+          </div>
         </div>
+        <p className="mb-3 mt-2">
+          {format(addDays(new Date(listing.date), 1), 'PPPP')}
+        </p>
+        <ul className="flex space-x-2">
+          {listing.instrumentsWanted.map((instrument) => (
+            <InstrumentChip key={instrument} instrument={instrument} />
+          ))}
+        </ul>
       </div>
-      <Button onClick={() => console.log(listing.id)}>Play Here</Button>
+      <Button className="h-10" onClick={() => console.log(listing.id)}>
+        Play Here
+      </Button>
     </li>
   )
 }

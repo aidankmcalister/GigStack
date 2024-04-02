@@ -17,6 +17,7 @@ export const QUERY: TypedDocumentNode<
       id
       title
       date
+      instrumentsWanted
       creator {
         id
         name

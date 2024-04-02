@@ -1,12 +1,5 @@
-const InstrumentChip = () => {
-  return (
-    <div>
-      <h2>{'InstrumentChip'}</h2>
-      <p>
-        {'Find me in ./web/src/components/InstrumentChip/InstrumentChip.tsx'}
-      </p>
-    </div>
-  )
+const InstrumentChip = ({ instrument }: { instrument: string }) => {
+  return <li className="rounded-md border px-1.5 shadow-sm">{instrument}</li>
 }
 
 export default InstrumentChip

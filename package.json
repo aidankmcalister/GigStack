@@ -33,6 +33,7 @@
     "@mui/x-date-pickers": "^7.1.0",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.10",
+    "ldrs": "^1.0.1",
     "react-hot-toast": "^2.4.1",
     "react-select": "^5.8.0"
   }

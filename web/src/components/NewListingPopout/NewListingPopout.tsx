@@ -33,6 +33,7 @@ const dropdownOptions = [
   { value: 'trumpet', label: 'Trumpet' },
   { value: 'flute', label: 'Flute' },
   { value: 'clarinet', label: 'Clarinet' },
+  { value: 'harp', label: 'Harp' },
 ]
 
 const NewListingPopout = ({ open, setOpen, notify }) => {

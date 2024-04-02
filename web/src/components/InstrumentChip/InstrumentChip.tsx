@@ -1,5 +1,12 @@
 const InstrumentChip = ({ instrument }: { instrument: string }) => {
-  return <li className="rounded-md border px-1.5 shadow-sm">{instrument}</li>
+  return (
+    <li className="rounded-md border px-1.5 shadow-sm">
+      {instrument
+        .split(' ')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ')}
+    </li>
+  )
 }
 
 export default InstrumentChip

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { addDays, format } from 'date-fns'
+import { format } from 'date-fns'
 
 import Button from '../Button/Button'
 import EditListingPopout from '../EditListingPopout/EditListingPopout'
@@ -45,9 +45,7 @@ const ListingItem = ({ listing, notify }) => {
             <p>{listing.creator.name}</p>
           </div>
         </div>
-        <p className="mb-3 mt-2">
-          {format(addDays(new Date(listing.date), 1), 'PPPP')}
-        </p>
+        <p className="mb-3 mt-2">{format(new Date(listing.date), 'PPPP')}</p>
         <ul className="flex space-x-2">
           {listing.instrumentsWanted.map((instrument) => (
             <InstrumentChip key={instrument} instrument={instrument} />

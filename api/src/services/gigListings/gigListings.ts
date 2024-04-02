@@ -20,6 +20,10 @@ export const gigListingsByUser = () => {
   return db.gigListing.findMany({ where: { userId: context.currentUser.id } })
 }
 
+export const attendingGigListingsByUser = () => {
+  return db.gigListing.findMany({ where: { userId: context.currentUser.id } })
+}
+
 export const createGigListing: MutationResolvers['createGigListing'] = ({
   input,
 }) => {

@@ -23,14 +23,15 @@ generator client {
 // GigListing model representing gig listings
 
 model GigListing {
-  id        String   @id @default(cuid())
-  title     String
-  date      DateTime
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  creator   User     @relation(name: "CreatedBy", fields: [userId], references: [id])
-  attendees User[]   @relation(name: "Attending")
-  userId    Int
+  id                String   @id @default(cuid())
+  title             String
+  date              DateTime
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @default(now())
+  instrumentsWanted String[]
+  creator           User     @relation(name: "CreatedBy", fields: [userId], references: [id])
+  attendees         User[]   @relation(name: "Attending")
+  userId            Int
 }
 
 model User {

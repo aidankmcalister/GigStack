@@ -50,7 +50,7 @@ const ListingItem = ({ listing }) => {
         </ul>
       </div>
       <Button className="h-10" onClick={() => console.log(listing.id)}>
-        Play Here
+        Attend
       </Button>
     </li>
   )

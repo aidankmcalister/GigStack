@@ -1,3 +1,4 @@
+import toast, { Toaster } from 'react-hot-toast'
 import type {
   AttendingGigsQuery,
   AttendingGigsQueryVariables,
@@ -8,6 +9,8 @@ import type {
   CellFailureProps,
   TypedDocumentNode,
 } from '@redwoodjs/web'
+
+import AttendingGigsList from '../AttendingGigsList/AttendingGigsList'
 
 export const QUERY: TypedDocumentNode<
   AttendingGigsQuery,
@@ -42,11 +45,18 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({
   gigListings,
 }: CellSuccessProps<AttendingGigsQuery>) => {
+  const notify = ({ message, type }) => {
+    const toastMethod = type ? toast[type] : toast
+    toastMethod(message)
+  }
+
   return (
-    <ul>
-      {gigListings.listingsAttending.map((item) => {
-        return <li key={item.id}>{JSON.stringify(item)}</li>
-      })}
-    </ul>
+    <div className="w-full">
+      <Toaster />
+      <AttendingGigsList
+        gigListings={gigListings.listingsAttending}
+        notify={notify}
+      />
+    </div>
   )
 }

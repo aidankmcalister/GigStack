@@ -12,6 +12,7 @@ import type {
 import NewListingPopout from 'src/components/NewListingPopout'
 
 import Button from '../Button/Button'
+import NewListingButton from '../NewListingButton/NewListingButton'
 import PostedGigList from '../PostedGigList/PostedGigList'
 
 export const QUERY: TypedDocumentNode<
@@ -51,13 +52,16 @@ export const Success = ({ gigListings }: CellSuccessProps<PostedGigsQuery>) => {
   }
 
   return (
-    <ul className="w-full">
+    <div className="relative w-full">
       <Toaster />
-      <Button
+      {/* <Button
         className="mb-2 bg-main-white-brighter shadow-sm"
         onClick={() => setPopoutOpen(true)}
       >
         Create New Listing
+      </Button> */}
+      <Button onClick={() => setPopoutOpen(true)}>
+        <NewListingButton />
       </Button>
       <PostedGigList gigListings={gigListings} notify={notify} />
       <NewListingPopout
@@ -65,6 +69,6 @@ export const Success = ({ gigListings }: CellSuccessProps<PostedGigsQuery>) => {
         open={popoutOpen}
         setOpen={setPopoutOpen}
       />
-    </ul>
+    </div>
   )
 }

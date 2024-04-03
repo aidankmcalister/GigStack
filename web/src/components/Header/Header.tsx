@@ -15,7 +15,7 @@ import { useAuth } from 'src/auth'
 // ]
 
 export default function Example() {
-  const { isAuthenticated, logOut } = useAuth()
+  const { isAuthenticated, currentUser, logOut } = useAuth()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -62,6 +62,14 @@ export default function Example() {
         </div>
         {isAuthenticated ? (
           <div className="flex flex-1 items-center justify-end gap-x-6">
+            <div className="flex items-center space-x-2 rounded-md bg-main-white-brighter px-3 py-2 shadow-sm">
+              <img
+                src={`https://robohash.org/${currentUser.id}`}
+                alt={currentUser.name}
+                className="w-7 rounded-full border "
+              />
+              <p className="font-medium">{currentUser.name}</p>
+            </div>
             <button
               onClick={logOut}
               className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900"
@@ -165,12 +173,19 @@ export default function Example() {
               </div>
               <div className="py-6">
                 {isAuthenticated ? (
-                  <button
-                    onClick={logOut}
-                    className="-mx-3 block w-full rounded-lg px-3 py-2.5 text-start text-base font-semibold leading-7 text-gray-900 hover:bg-main-orange/30"
-                  >
-                    Log Out
-                  </button>
+                  <div>
+                    <img
+                      src={`https://robohash.org/${currentUser.id}`}
+                      alt={currentUser.name}
+                      className="w-7 rounded-full border"
+                    />
+                    <button
+                      onClick={logOut}
+                      className="-mx-3 block w-full rounded-lg px-3 py-2.5 text-start text-base font-semibold leading-7 text-gray-900 hover:bg-main-orange/30"
+                    >
+                      Log Out
+                    </button>
+                  </div>
                 ) : (
                   <Link
                     onClick={() => setMobileMenuOpen(false)}

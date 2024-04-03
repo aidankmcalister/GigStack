@@ -52,7 +52,7 @@ const NewListingPopout = ({ open, setOpen, notify }) => {
       setSelectedDate(null)
     },
     onError: (error) => {
-      const errorMessage = `Failed to create gig listing: ${error.message}`
+      const errorMessage = `Failed to create gig listing`
       notify({ message: errorMessage, type: 'error' })
     },
     refetchQueries: ['PostedGigsQuery'],

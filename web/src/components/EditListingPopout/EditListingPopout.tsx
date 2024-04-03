@@ -1,7 +1,9 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
 import { Dialog, Transition } from '@headlessui/react'
 import { DesktopDatePicker } from '@mui/x-date-pickers'
+import { format } from 'date-fns'
+import dayjs from 'dayjs'
 import Select from 'react-select'
 
 import { Form, Label, TextField } from '@redwoodjs/forms'
@@ -103,6 +105,19 @@ const EditListingPopout = ({ open, setOpen, notify, listing }) => {
       },
     })
   }
+
+  useEffect(() => {
+    if (listing && listing.instrumentsWanted) {
+      console.log("Instruments from listing:", listing.instrumentsWanted);
+      const instruments = listing.instrumentsWanted.map((instrument) => ({
+        value: instrument,
+        label: instrument,
+      }));
+      console.log("Formatted instruments:", instruments);
+      setSelectedInstruments(instruments);
+    }
+  }, [listing]);
+
 
   return (
     <Transition.Root show={open} as={Fragment}>

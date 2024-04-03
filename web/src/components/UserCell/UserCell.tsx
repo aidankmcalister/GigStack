@@ -1,4 +1,5 @@
 import { helix } from 'ldrs'
+import toast, { Toaster } from 'react-hot-toast'
 import type { FindUserQuery, FindUserQueryVariables } from 'types/graphql'
 
 import type {
@@ -8,7 +9,6 @@ import type {
 } from '@redwoodjs/web'
 
 import UserInfoForm from '../UserInfoForm/UserInfoForm'
-import toast, { Toaster } from 'react-hot-toast'
 
 export const QUERY: TypedDocumentNode<
   FindUserQuery,
@@ -43,7 +43,6 @@ export const Failure = ({
 export const Success = ({
   user,
 }: CellSuccessProps<FindUserQuery, FindUserQueryVariables>) => {
-
   const notify = ({ message, type }) => {
     const toastMethod = type ? toast[type] : toast
     toastMethod(message)

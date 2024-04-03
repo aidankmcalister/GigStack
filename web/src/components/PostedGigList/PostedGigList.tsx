@@ -22,7 +22,7 @@ const PostedGigList = ({ gigListings, notify }) => {
           ))}
         </ul>
       ) : (
-        <p>No Listings</p>
+        <p className="w-full text-center">No listings yet, create one!</p>
       )}
     </>
   )

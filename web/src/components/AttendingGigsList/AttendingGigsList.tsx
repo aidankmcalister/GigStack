@@ -19,7 +19,9 @@ const AttendingGigsList = ({ gigListings, notify }) => {
           ))}
         </ul>
       ) : (
-        <p>No Listings</p>
+        <p className="w-full text-center">
+          No listings yet, go to the home page and select one to attend!
+        </p>
       )}
     </>
   )

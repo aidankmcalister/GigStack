@@ -167,7 +167,6 @@ const NewListingPopout = ({ open, setOpen, notify }) => {
                           primary: 'rgba(255, 136, 17, 0.8)',
                         },
                       })}
-                      className="w-96"
                     />
                   </div>
 

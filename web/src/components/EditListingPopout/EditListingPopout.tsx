@@ -198,7 +198,6 @@ const EditListingPopout = ({ open, setOpen, notify, listing }) => {
                           primary: 'rgba(255, 136, 17, 0.8)',
                         },
                       })}
-                      className="w-96"
                     />
                   </div>
                   <button

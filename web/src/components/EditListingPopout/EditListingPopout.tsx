@@ -1,11 +1,27 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 
 import { Dialog, Transition } from '@headlessui/react'
+import { DesktopDatePicker } from '@mui/x-date-pickers'
+import Select from 'react-select'
 
-import { Form, Label, TextField, DateField } from '@redwoodjs/forms'
+import { Form, Label, TextField } from '@redwoodjs/forms'
 import { useMutation } from '@redwoodjs/web'
 
 import Button from '../Button/Button'
+
+const dropdownOptions = [
+  { value: 'guitar', label: 'Guitar' },
+  { value: 'piano', label: 'Piano' },
+  { value: 'drums', label: 'Drums' },
+  { value: 'bass', label: 'Bass' },
+  { value: 'voice', label: 'Voice' },
+  { value: 'saxophone', label: 'Saxophone' },
+  { value: 'violin', label: 'Violin' },
+  { value: 'trumpet', label: 'Trumpet' },
+  { value: 'flute', label: 'Flute' },
+  { value: 'clarinet', label: 'Clarinet' },
+  { value: 'harp', label: 'Harp' },
+]
 
 export const UPDATE_LISTING_MUTATION = gql`
   mutation UpdateGigListingMutation(
@@ -16,6 +32,7 @@ export const UPDATE_LISTING_MUTATION = gql`
       id
       title
       date
+      instrumentsWanted
     }
   }
 `
@@ -29,6 +46,9 @@ export const DELETE_LISTING_MUTATION = gql`
 `
 
 const EditListingPopout = ({ open, setOpen, notify, listing }) => {
+  const [selectedInstruments, setSelectedInstruments] = useState([])
+  const [selectedDate, setSelectedDate] = useState(null)
+
   const [updateGigListing, { loading }] = useMutation(UPDATE_LISTING_MUTATION, {
     onCompleted: (data) => {
       notify({
@@ -76,12 +96,13 @@ const EditListingPopout = ({ open, setOpen, notify, listing }) => {
         id: listing.id,
         input: {
           ...values,
+          instrumentsWanted: selectedInstruments.map(
+            (instrument) => instrument.value
+          ),
         },
       },
     })
   }
-
-  const formattedDate = listing.date.split('T')[0]
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -99,7 +120,7 @@ const EditListingPopout = ({ open, setOpen, notify, listing }) => {
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -122,7 +143,7 @@ const EditListingPopout = ({ open, setOpen, notify, listing }) => {
                       name="title"
                       validation={{ required: true }}
                       defaultValue={listing.title}
-                      className="border rounded-md px-2 py-1"
+                      className="rounded-md border px-2 py-1"
                     />
                   </div>
 
@@ -130,14 +151,64 @@ const EditListingPopout = ({ open, setOpen, notify, listing }) => {
                     <Label name="date" className="font-semibold">
                       Date
                     </Label>
-                    <DateField name="date" defaultValue={formattedDate} />
+                    <DesktopDatePicker
+                      value={selectedDate}
+                      onChange={(date) => setSelectedDate(date)}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
                   </div>
 
-                  <button className="px-2 py-1 border rounded-md" type="submit">
+                  <div className="flex flex-col">
+                    <Label name="instrumentsWanted" className="font-semibold">
+                      Instruments Wanted
+                    </Label>
+                    <Select
+                      closeMenuOnSelect={false}
+                      isMulti
+                      isClearable
+                      isSearchable
+                      options={dropdownOptions}
+                      value={selectedInstruments}
+                      onChange={setSelectedInstruments}
+                      menuPortalTarget={document.body}
+                      styles={{
+                        menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                        option: (base, { isFocused }) => ({
+                          ...base,
+                          color: isFocused ? 'white' : 'black',
+                        }),
+                        multiValue: (styles) => ({
+                          ...styles,
+                          backgroundColor: 'rgba(255, 136, 17, 0.2)',
+                        }),
+                        multiValueLabel: (styles) => ({
+                          ...styles,
+                          color: 'rgba(255, 136, 17, 1)',
+                        }),
+                        multiValueRemove: (styles) => ({
+                          ...styles,
+                          color: 'rgba(255, 136, 17, 1)',
+                        }),
+                      }}
+                      theme={(theme) => ({
+                        ...theme,
+                        colors: {
+                          ...theme.colors,
+                          primary25: 'rgba(255, 136, 17, 0.7)',
+                          primary: 'rgba(255, 136, 17, 0.8)',
+                        },
+                      })}
+                      className="w-96"
+                    />
+                  </div>
+                  <button
+                    className="rounded-md border px-2 py-1 hover:bg-main-orange/30 hover:text-gray-500"
+                    type="submit"
+                  >
                     Submit
                   </button>
                 </Form>
-                <Button onClick={handleDelete} className="bg-red-500 w-full">
+                <Button onClick={handleDelete} className="mt-3 w-full">
                   Delete
                 </Button>
               </Dialog.Panel>

@@ -134,13 +134,40 @@ const NewListingPopout = ({ open, setOpen, notify }) => {
                     <Select
                       closeMenuOnSelect={false}
                       isMulti
+                      isClearable
+                      isSearchable
                       options={dropdownOptions}
                       value={selectedInstruments}
                       onChange={setSelectedInstruments}
                       menuPortalTarget={document.body}
                       styles={{
                         menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                        option: (base, { isFocused }) => ({
+                          ...base,
+                          color: isFocused ? 'white' : 'black',
+                        }),
+                        multiValue: (styles) => ({
+                          ...styles,
+                          backgroundColor: 'rgba(255, 136, 17, 0.2)',
+                        }),
+                        multiValueLabel: (styles) => ({
+                          ...styles,
+                          color: 'rgba(255, 136, 17, 1)',
+                        }),
+                        multiValueRemove: (styles) => ({
+                          ...styles,
+                          color: 'rgba(255, 136, 17, 1)',
+                        }),
                       }}
+                      theme={(theme) => ({
+                        ...theme,
+                        colors: {
+                          ...theme.colors,
+                          primary25: 'rgba(255, 136, 17, 0.7)',
+                          primary: 'rgba(255, 136, 17, 0.8)',
+                        },
+                      })}
+                      className="w-96"
                     />
                   </div>
 

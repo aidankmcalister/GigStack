@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid'
+import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/24/solid'
 import { helix } from 'ldrs'
 import Select from 'react-select'
 import type { GigListingsQuery, GigListingsQueryVariables } from 'types/graphql'
@@ -11,7 +11,6 @@ import type {
   TypedDocumentNode,
 } from '@redwoodjs/web'
 
-import Button from '../Button/Button'
 import GigListingsList from '../GigListingsList/GigListingsList'
 
 export const QUERY: TypedDocumentNode<
@@ -63,7 +62,7 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({
   gigListings,
 }: CellSuccessProps<GigListingsQuery>) => {
-  const [sortByNewest, setSortByNewest] = useState(true)
+  const [sortByNewest, setSortByNewest] = useState(false)
   const [selectedInstruments, setSelectedInstruments] = useState([])
 
   const handleSort = () => {
@@ -78,10 +77,9 @@ export const Success = ({
     setSortByNewest((prevSortByNewest) => !prevSortByNewest)
   }
 
-  // Function to filter gig listings by selected instruments
   const filterByInstruments = (listings) => {
     if (selectedInstruments.length === 0) {
-      return listings // If no instruments selected, return all listings
+      return listings
     }
     return listings.filter((listing) =>
       selectedInstruments.every((instrument) =>
@@ -96,32 +94,58 @@ export const Success = ({
   return (
     <>
       <div className="flex space-x-3">
-        <Button
+        <button
           onClick={toggleSortOrder}
-          className="flex w-28 items-center justify-between bg-main-white-brighter font-medium"
+          className="flex w-[6.5rem] items-center justify-between rounded-md border border-main-orange/80 bg-main-white-brighter px-2 py-1 font-medium text-main-orange/80 hover:bg-main-orange/30 hover:text-main-orange"
         >
           {sortByNewest ? (
             <>
-              Soonest
-              <ChevronUpIcon className="ml-1 w-5" />
+              Latest
+              <ArrowDownIcon className="w-5" />
             </>
           ) : (
             <>
-              Latest
-              <ChevronDownIcon className="ml-1 w-5" />
+              Soonest
+              <ArrowUpIcon className="w-5" />
             </>
           )}
-        </Button>
+        </button>
         <Select
           closeMenuOnSelect={false}
           isMulti
+          isClearable
+          isSearchable
           options={dropdownOptions}
           value={selectedInstruments}
           onChange={setSelectedInstruments}
           menuPortalTarget={document.body}
           styles={{
             menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+            option: (base, { isFocused }) => ({
+              ...base,
+              color: isFocused ? 'white' : 'black',
+            }),
+            multiValue: (styles) => ({
+              ...styles,
+              backgroundColor: 'rgba(255, 136, 17, 0.2)',
+            }),
+            multiValueLabel: (styles) => ({
+              ...styles,
+              color: 'rgba(255, 136, 17, 1)',
+            }),
+            multiValueRemove: (styles) => ({
+              ...styles,
+              color: 'rgba(255, 136, 17, 1)',
+            }),
           }}
+          theme={(theme) => ({
+            ...theme,
+            colors: {
+              ...theme.colors,
+              primary25: 'rgba(255, 136, 17, 0.7)',
+              primary: 'rgba(255, 136, 17, 0.8)',
+            },
+          })}
           className="w-96"
         />
       </div>
@@ -129,7 +153,7 @@ export const Success = ({
       {filteredGigListings.length > 0 ? (
         <GigListingsList gigListings={filteredGigListings} />
       ) : (
-        <p>No Listings</p>
+        <p className="w-full text-center">No listings yet</p>
       )}
     </>
   )

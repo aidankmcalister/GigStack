@@ -11,7 +11,10 @@ const PostedGigsPage = () => {
       <Metadata title="Posted Gigs" description="Posted Gigs page" />
 
       {currentUser && currentUser.name === null ? (
-        <Link to={routes.profile()} className="text-blue-500 hover:underline">
+        <Link
+          to={routes.profile()}
+          className="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-main-orange/30"
+        >
           Complete your profile to view your posted gigs
         </Link>
       ) : (

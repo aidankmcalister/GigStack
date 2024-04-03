@@ -13,20 +13,20 @@ export const UPDATE_USER_MUTATION = gql`
   }
 `
 
-const UserInfoForm = ({ user }) => {
+const UserInfoForm = ({ user, notify }) => {
   const [name, setName] = useState(user.name || '')
   const [email, setEmail] = useState(user.email || '')
 
   const [updateUser, { loading }] = useMutation(UPDATE_USER_MUTATION, {
     onCompleted: (data) => {
-      // notify({
-      //   message: `Gig Listing ${data.updateUser.title} successfully updated.`,
-      //   type: 'success',
-      // })
+      notify({
+        message: `User successfully updated.`,
+        type: 'success',
+      })
     },
     onError: (error) => {
-      const errorMessage = `Failed to update gig listing: ${user.name}`
-      // notify({ message: errorMessage, type: 'error' })
+      const errorMessage = `Failed to update profile`
+      notify({ message: errorMessage, type: 'error' })
     },
     refetchQueries: ['UserQuery'],
   })

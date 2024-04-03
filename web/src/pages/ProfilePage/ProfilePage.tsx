@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 
+
+
 import { Metadata } from '@redwoodjs/web'
 
 import { useAuth } from 'src/auth'
@@ -15,9 +17,12 @@ const ProfilePage = () => {
     }
   }, [currentUser])
 
+
+
   return (
     <>
       <Metadata title="Profile" description="Profile page" />
+
       <section className="mx-auto flex w-[90%] flex-col items-center space-y-3">
         <h1 className="text-3xl font-semibold">Profile</h1>
         {renderUserCell && <UserCell id={currentUser.id} />}

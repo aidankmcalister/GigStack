@@ -8,6 +8,7 @@ import type {
 } from '@redwoodjs/web'
 
 import UserInfoForm from '../UserInfoForm/UserInfoForm'
+import toast, { Toaster } from 'react-hot-toast'
 
 export const QUERY: TypedDocumentNode<
   FindUserQuery,
@@ -42,9 +43,16 @@ export const Failure = ({
 export const Success = ({
   user,
 }: CellSuccessProps<FindUserQuery, FindUserQueryVariables>) => {
+
+  const notify = ({ message, type }) => {
+    const toastMethod = type ? toast[type] : toast
+    toastMethod(message)
+  }
+
   return (
     <div>
-      <UserInfoForm user={user} />
+      <Toaster />
+      <UserInfoForm user={user} notify={notify} />
     </div>
   )
 }

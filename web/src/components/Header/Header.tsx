@@ -37,24 +37,28 @@ export default function Example() {
           >
             Gigs
           </Link>
-          <Link
-            to={routes.profile()}
-            className="text-sm font-semibold leading-6 text-gray-900"
-          >
-            Profile
-          </Link>
-          <Link
-            to={routes.attendingGigs()}
-            className="text-sm font-semibold leading-6 text-gray-900"
-          >
-            Attending Gigs
-          </Link>
-          <Link
-            to={routes.postedGigs()}
-            className="text-sm font-semibold leading-6 text-gray-900"
-          >
-            Posted Gigs
-          </Link>
+          {isAuthenticated && (
+            <>
+              <Link
+                to={routes.profile()}
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                Profile
+              </Link>
+              <Link
+                to={routes.attendingGigs()}
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                Attending Gigs
+              </Link>
+              <Link
+                to={routes.postedGigs()}
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                Posted Gigs
+              </Link>
+            </>
+          )}
         </div>
         {isAuthenticated ? (
           <div className="flex flex-1 items-center justify-end gap-x-6">
@@ -75,7 +79,7 @@ export default function Example() {
             </Link>
             <Link
               to={routes.signup()}
-              className="rounded-md bg-main-orange px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="rounded-md bg-main-orange px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-main-orange/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Sign up
             </Link>
@@ -107,8 +111,9 @@ export default function Example() {
             </Link>
             {!isAuthenticated && (
               <Link
+                onClick={() => setMobileMenuOpen(false)}
                 to={routes.signup()}
-                className="ml-auto rounded-md bg-main-orange px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="ml-auto rounded-md bg-main-orange px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-main-orange/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign up
               </Link>
@@ -126,42 +131,51 @@ export default function Example() {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 <Link
+                  onClick={() => setMobileMenuOpen(false)}
                   to={routes.home()}
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-main-orange/30"
                 >
                   Gigs
                 </Link>
-                <Link
-                  to={routes.profile()}
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Profile
-                </Link>
-                <Link
-                  to={routes.attendingGigs()}
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Attending Gigs
-                </Link>
-                <Link
-                  to={routes.postedGigs()}
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Posted Gigs
-                </Link>
+                {isAuthenticated && (
+                  <>
+                    <Link
+                      onClick={() => setMobileMenuOpen(false)}
+                      to={routes.profile()}
+                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-main-orange/30"
+                    >
+                      Profile
+                    </Link>
+                    <Link
+                      onClick={() => setMobileMenuOpen(false)}
+                      to={routes.attendingGigs()}
+                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-main-orange/30"
+                    >
+                      Attending Gigs
+                    </Link>
+                    <Link
+                      onClick={() => setMobileMenuOpen(false)}
+                      to={routes.postedGigs()}
+                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-main-orange/30"
+                    >
+                      Posted Gigs
+                    </Link>
+                  </>
+                )}
               </div>
               <div className="py-6">
                 {isAuthenticated ? (
                   <button
                     onClick={logOut}
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    className="-mx-3 block w-full rounded-lg px-3 py-2.5 text-start text-base font-semibold leading-7 text-gray-900 hover:bg-main-orange/30"
                   >
                     Log Out
                   </button>
                 ) : (
                   <Link
+                    onClick={() => setMobileMenuOpen(false)}
                     to={routes.login()}
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-main-orange/30"
                   >
                     Log in
                   </Link>

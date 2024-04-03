@@ -98,13 +98,18 @@ export const Success = ({
       <div className="flex space-x-3">
         <Button
           onClick={toggleSortOrder}
-          className="flex items-center bg-main-white-brighter font-medium"
+          className="flex w-28 items-center justify-between bg-main-white-brighter font-medium"
         >
-          Date
           {sortByNewest ? (
-            <ChevronUpIcon className="ml-1 w-5" />
+            <>
+              Soonest
+              <ChevronUpIcon className="ml-1 w-5" />
+            </>
           ) : (
-            <ChevronDownIcon className="ml-1 w-5" />
+            <>
+              Latest
+              <ChevronDownIcon className="ml-1 w-5" />
+            </>
           )}
         </Button>
         <Select

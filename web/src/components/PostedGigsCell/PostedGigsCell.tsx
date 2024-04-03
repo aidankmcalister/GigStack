@@ -68,9 +68,9 @@ export const Success = ({ gigListings }: CellSuccessProps<PostedGigsQuery>) => {
       >
         Create New Listing
       </Button> */}
-      <Button onClick={() => setPopoutOpen(true)}>
-        <NewListingButton />
-      </Button>
+      {/* <Button onClick={() => setPopoutOpen(true)}> */}
+        <NewListingButton setPopoutOpen={setPopoutOpen} />
+      {/* </Button> */}
       <PostedGigList gigListings={gigListings} notify={notify} />
       <NewListingPopout
         notify={notify}

@@ -8,7 +8,7 @@
 [web]
   title = "GigStack"
   port = 8910
-  apiUrl = "https://musician-booking-akm.vercel.app/api/functions" # You can customize graphql and dbauth urls individually too: see https://redwoodjs.com/docs/app-configuration-redwood-toml#api-paths
+  apiUrl = "/api/functions" # You can customize graphql and dbauth urls individually too: see https://redwoodjs.com/docs/app-configuration-redwood-toml#api-paths
   includeEnvironmentVariables = [
     "DATABASE_URL",
     "DIRECT_URL"

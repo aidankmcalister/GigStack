@@ -8,12 +8,6 @@ import { Link, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 
-// const navigation = [
-//   { name: 'Attending Gigs', to: routes.attendingGigs() },
-//   { name: 'Posted Gigs', to: routes.postedGigs() },
-//   { name: 'Profile', to: routes.profile() },
-// ]
-
 export default function Example() {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -60,7 +54,7 @@ export default function Example() {
             </>
           )}
         </div>
-        {isAuthenticated ? (
+        {isAuthenticated && currentUser ? (
           <div className="flex flex-1 items-center justify-end gap-x-6">
             <div className="flex items-center space-x-2 rounded-md bg-main-white-brighter px-3 py-2 shadow-sm">
               <img

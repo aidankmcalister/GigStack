@@ -17,11 +17,7 @@ services:
   - type: rewrite
     source: /.redwood/functions/*
     # Replace `destination` here after your first deploy:
-    #
-    # ```
-    # destination: https://my-redwood-project-api.onrender.com/*
-    # ```
-    destination: replace_with_api_url/*
+    destination: https://musician-booking-app-api.onrender.com/*
   - type: rewrite
     source: /*
     destination: /200.html

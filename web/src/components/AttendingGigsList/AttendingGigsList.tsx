@@ -4,17 +4,11 @@ import Button from '../Button/Button'
 import InstrumentChip from '../InstrumentChip/InstrumentChip'
 
 const AttendingGigsList = ({ gigListings, notify }) => {
-  const sortedGigListings = gigListings.slice().sort((a, b) => {
-    const dateA = new Date(a.date).getTime()
-    const dateB = new Date(b.date).getTime()
-    return dateA - dateB
-  })
-
   return (
     <>
-      {sortedGigListings.length > 0 ? (
+      {gigListings.length > 0 ? (
         <ul className="w-full space-y-3">
-          {sortedGigListings.map((listing) => (
+          {gigListings.map((listing) => (
             <ListingItem key={listing.id} listing={listing} />
           ))}
         </ul>

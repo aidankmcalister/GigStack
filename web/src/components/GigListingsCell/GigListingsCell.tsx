@@ -44,6 +44,7 @@ const dropdownOptions = [
   { value: 'flute', label: 'Flute' },
   { value: 'clarinet', label: 'Clarinet' },
   { value: 'harp', label: 'Harp' },
+  { value: 'piccolo', label: 'Piccolo' },
 ]
 
 export const Loading = () => {
@@ -101,12 +102,12 @@ export const Success = ({
           {sortByNewest ? (
             <>
               Latest
-              <ArrowDownIcon className="w-5" />
+              <ArrowUpIcon className="w-5" />
             </>
           ) : (
             <>
               Soonest
-              <ArrowUpIcon className="w-5" />
+              <ArrowDownIcon className="w-5" />
             </>
           )}
         </button>

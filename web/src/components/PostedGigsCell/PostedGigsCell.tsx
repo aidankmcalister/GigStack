@@ -1,7 +1,9 @@
 import { useState } from 'react'
 
+import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/24/solid'
 import { helix } from 'ldrs'
 import toast, { Toaster } from 'react-hot-toast'
+import Select from 'react-select'
 import type { PostedGigsQuery, PostedGigsQueryVariables } from 'types/graphql'
 
 import type {
@@ -12,7 +14,6 @@ import type {
 
 import NewListingPopout from 'src/components/NewListingPopout'
 
-import Button from '../Button/Button'
 import NewListingButton from '../NewListingButton/NewListingButton'
 import PostedGigList from '../PostedGigList/PostedGigList'
 
@@ -38,6 +39,21 @@ export const QUERY: TypedDocumentNode<
   }
 `
 
+const dropdownOptions = [
+  { value: 'guitar', label: 'Guitar' },
+  { value: 'piano', label: 'Piano' },
+  { value: 'drums', label: 'Drums' },
+  { value: 'bass', label: 'Bass' },
+  { value: 'voice', label: 'Voice' },
+  { value: 'saxophone', label: 'Saxophone' },
+  { value: 'violin', label: 'Violin' },
+  { value: 'trumpet', label: 'Trumpet' },
+  { value: 'flute', label: 'Flute' },
+  { value: 'clarinet', label: 'Clarinet' },
+  { value: 'harp', label: 'Harp' },
+  { value: 'piccolo', label: 'Piccolo' },
+]
+
 export const Loading = () => {
   helix.register()
   return (
@@ -59,24 +75,101 @@ export const Success = ({ gigListings }: CellSuccessProps<PostedGigsQuery>) => {
     toastMethod(message)
   }
 
+  const [sortByNewest, setSortByNewest] = useState(false)
+  const [selectedInstruments, setSelectedInstruments] = useState([])
+
+  const handleSort = () => {
+    return gigListings.slice().sort((a, b) => {
+      const dateA = new Date(a.date).getTime()
+      const dateB = new Date(b.date).getTime()
+      return sortByNewest ? dateB - dateA : dateA - dateB
+    })
+  }
+
+  const toggleSortOrder = () => {
+    setSortByNewest((prevSortByNewest) => !prevSortByNewest)
+  }
+
+  const filterByInstruments = (listings) => {
+    if (selectedInstruments.length === 0) {
+      return listings
+    }
+    return listings.filter((listing) =>
+      selectedInstruments.every((instrument) =>
+        listing.instrumentsWanted.includes(instrument.value)
+      )
+    )
+  }
+
+  const sortedGigListings = handleSort()
+  const filteredGigListings = filterByInstruments(sortedGigListings)
+
   return (
-    <div className="relative w-full">
+    <>
       <Toaster />
-      {/* <Button
-        className="mb-2 bg-main-white-brighter shadow-sm"
-        onClick={() => setPopoutOpen(true)}
-      >
-        Create New Listing
-      </Button> */}
-      {/* <Button onClick={() => setPopoutOpen(true)}> */}
-        <NewListingButton setPopoutOpen={setPopoutOpen} />
-      {/* </Button> */}
-      <PostedGigList gigListings={gigListings} notify={notify} />
+      <NewListingButton setPopoutOpen={setPopoutOpen} />
+      <div className="flex space-x-3">
+        <button
+          onClick={toggleSortOrder}
+          className="flex w-[6.5rem] items-center justify-between rounded-md border border-main-orange/80 bg-main-white-brighter px-2 py-1 font-medium text-main-orange/80 hover:bg-main-orange/30 hover:text-main-orange"
+        >
+          {sortByNewest ? (
+            <>
+              Latest
+              <ArrowUpIcon className="w-5" />
+            </>
+          ) : (
+            <>
+              Soonest
+              <ArrowDownIcon className="w-5" />
+            </>
+          )}
+        </button>
+        <Select
+          closeMenuOnSelect={false}
+          isMulti
+          isClearable
+          isSearchable
+          options={dropdownOptions}
+          value={selectedInstruments}
+          onChange={setSelectedInstruments}
+          menuPortalTarget={document.body}
+          styles={{
+            menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+            option: (base, { isFocused }) => ({
+              ...base,
+              color: isFocused ? 'white' : 'black',
+            }),
+            multiValue: (styles) => ({
+              ...styles,
+              backgroundColor: 'rgba(255, 136, 17, 0.2)',
+            }),
+            multiValueLabel: (styles) => ({
+              ...styles,
+              color: 'rgba(255, 136, 17, 1)',
+            }),
+            multiValueRemove: (styles) => ({
+              ...styles,
+              color: 'rgba(255, 136, 17, 1)',
+            }),
+          }}
+          theme={(theme) => ({
+            ...theme,
+            colors: {
+              ...theme.colors,
+              primary25: 'rgba(255, 136, 17, 0.7)',
+              primary: 'rgba(255, 136, 17, 0.8)',
+            },
+          })}
+          className="w-96"
+        />
+      </div>
+      <PostedGigList gigListings={filteredGigListings} notify={notify} />
       <NewListingPopout
         notify={notify}
         open={popoutOpen}
         setOpen={setPopoutOpen}
       />
-    </div>
+    </>
   )
 }

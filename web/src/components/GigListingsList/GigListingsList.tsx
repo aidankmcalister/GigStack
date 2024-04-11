@@ -1,7 +1,17 @@
 import { format } from 'date-fns'
 
+import { useMutation } from '@redwoodjs/web'
+
 import Button from '../Button/Button'
 import InstrumentChip from '../InstrumentChip/InstrumentChip'
+
+const ATTEND_MUTATION = gql`
+  mutation AttendMutation($listingId: String!) {
+    attendListing(listingId: $listingId) {
+      id
+    }
+  }
+`
 
 const GigListingsList = ({ gigListings }) => {
   return (
@@ -22,6 +32,19 @@ const GigListingsList = ({ gigListings }) => {
 export default GigListingsList
 
 const ListingItem = ({ listing }) => {
+  const [attend, { loading }] = useMutation(ATTEND_MUTATION, {
+    onCompleted: () => {
+      console.log('Successfully attended listing!')
+    },
+    onError: (error) => {
+      console.error('Error attending listing:', error)
+    },
+  })
+
+  const handleClick = () => {
+    attend({ variables: { listingId: listing.id } })
+  }
+
   return (
     <li className="flex justify-between rounded-md border bg-main-white-brighter p-5 shadow-md">
       <div>
@@ -43,8 +66,8 @@ const ListingItem = ({ listing }) => {
           ))}
         </ul>
       </div>
-      <Button className="h-10" onClick={() => console.log(listing.id)}>
-        Attend
+      <Button className="h-10" onClick={handleClick} disabled={loading}>
+        {loading ? 'Attending...' : 'Attend'}
       </Button>
     </li>
   )

@@ -8,7 +8,7 @@
 [web]
   title = "GigStack"
   port = 8910
-  apiUrl = "/.redwood"
+  apiUrl = "/.redwood/functions"
   includeEnvironmentVariables = [
     "DATABASE_URL",
     "DIRECT_URL"

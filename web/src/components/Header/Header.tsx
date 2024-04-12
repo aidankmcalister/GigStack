@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -11,6 +11,7 @@ import { useAuth } from 'src/auth'
 export default function Example() {
   const { isAuthenticated, currentUser, logOut } = useAuth()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [currentUserName, setCurrentUserName] = useState('')
 
   return (
     <header className="bg-main-white">
@@ -62,7 +63,6 @@ export default function Example() {
                 alt={currentUser.name}
                 className="w-7 rounded-full border "
               />
-              <p className="font-medium">{currentUser.name}</p>
             </div>
             <button
               onClick={logOut}
@@ -111,7 +111,7 @@ export default function Example() {
               <span className="sr-only">Your Company</span>
               <MusicalNoteIcon className="h-8 w-auto text-main-orange" />
             </Link>
-            {!isAuthenticated && (
+            {!isAuthenticated && currentUser ? (
               <Link
                 onClick={() => setMobileMenuOpen(false)}
                 to={routes.signup()}
@@ -119,6 +119,8 @@ export default function Example() {
               >
                 Sign up
               </Link>
+            ) : (
+              <></>
             )}
             <button
               type="button"
@@ -139,7 +141,7 @@ export default function Example() {
                 >
                   Gigs
                 </Link>
-                {isAuthenticated && (
+                {isAuthenticated && currentUser ? (
                   <>
                     <Link
                       onClick={() => setMobileMenuOpen(false)}
@@ -163,10 +165,12 @@ export default function Example() {
                       Posted Gigs
                     </Link>
                   </>
+                ) : (
+                  <></>
                 )}
               </div>
               <div className="py-6">
-                {isAuthenticated ? (
+                {isAuthenticated && currentUser ? (
                   <div>
                     <img
                       src={`https://robohash.org/${currentUser.id}`}

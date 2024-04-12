@@ -71,8 +71,8 @@ const ListingItem = ({ listing, notify }) => {
           ))}
         </ul>
       </div>
-      <Button className="px-10" onClick={handleClick} disabled={loading}>
-      {loading ? 'Removing...' : 'Stop Attending'}
+      <Button className="w-36 px-10" onClick={handleClick} disabled={loading}>
+        {loading ? 'Removing...' : 'Stop Attending'}
       </Button>
     </li>
   )

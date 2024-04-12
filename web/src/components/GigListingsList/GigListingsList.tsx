@@ -2,6 +2,8 @@ import { format } from 'date-fns'
 
 import { useMutation } from '@redwoodjs/web'
 
+import { useAuth } from 'src/auth'
+
 import Button from '../Button/Button'
 import InstrumentChip from '../InstrumentChip/InstrumentChip'
 
@@ -32,6 +34,8 @@ const GigListingsList = ({ gigListings, notify }) => {
 export default GigListingsList
 
 const ListingItem = ({ listing, notify }) => {
+  const { currentUser } = useAuth()
+
   const [attend, { loading }] = useMutation(ATTEND_MUTATION, {
     onCompleted: () => {
       console.log('Successfully attended listing!')
@@ -43,7 +47,7 @@ const ListingItem = ({ listing, notify }) => {
     onError: (error) => {
       console.error('Error attending listing:', error)
     },
-    refetchQueries: ['AttendingGigsQuery'],
+    refetchQueries: ['AttendingGigsQuery', 'GigListingsQuery'],
   })
 
   const handleClick = () => {
@@ -71,8 +75,14 @@ const ListingItem = ({ listing, notify }) => {
           ))}
         </ul>
       </div>
-      <Button className="px-10" onClick={handleClick} disabled={loading}>
-        {loading ? 'Adding...' : 'Attend'}
+      <Button className="w-36 px-10" onClick={handleClick} disabled={loading}>
+        {listing.attendees.some((attendee) => attendee.id === currentUser.id)
+          ? loading
+            ? 'Removing...'
+            : 'Stop Attending'
+          : loading
+          ? 'Adding...'
+          : 'Attend'}
       </Button>
     </li>
   )

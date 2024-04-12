@@ -43,7 +43,7 @@ const ListingItem = ({ listing, notify }) => {
     onError: (error) => {
       console.error('Error attending listing:', error)
     },
-    refetchQueries: ['AttendingGigsQuery'],
+    refetchQueries: ['AttendingGigsQuery', 'GigListingsQuery'],
   })
 
   const handleClick = () => {

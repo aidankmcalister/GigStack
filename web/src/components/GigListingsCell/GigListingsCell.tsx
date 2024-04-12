@@ -29,6 +29,9 @@ export const QUERY: TypedDocumentNode<
         name
         email
       }
+      attendees {
+        id
+      }
     }
   }
 `

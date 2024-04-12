@@ -47,6 +47,7 @@ const ListingItem = ({ listing, notify }) => {
         </ul>
       </div>
       <Button
+        className="px-10"
         onClick={() => {
           setPopoutOpen(true)
         }}

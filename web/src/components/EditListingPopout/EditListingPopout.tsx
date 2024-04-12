@@ -108,16 +108,15 @@ const EditListingPopout = ({ open, setOpen, notify, listing }) => {
 
   useEffect(() => {
     if (listing && listing.instrumentsWanted) {
-      console.log("Instruments from listing:", listing.instrumentsWanted);
+      console.log('Instruments from listing:', listing.instrumentsWanted)
       const instruments = listing.instrumentsWanted.map((instrument) => ({
         value: instrument,
         label: instrument,
-      }));
-      console.log("Formatted instruments:", instruments);
-      setSelectedInstruments(instruments);
+      }))
+      console.log('Formatted instruments:', instruments)
+      setSelectedInstruments(instruments)
     }
-  }, [listing]);
-
+  }, [listing])
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -216,7 +215,7 @@ const EditListingPopout = ({ open, setOpen, notify, listing }) => {
                     />
                   </div>
                   <button
-                    className="rounded-md border px-2 py-1 hover:bg-main-orange/30 hover:text-gray-500"
+                    className="rounded-md border px-2 py-1 hover:bg-main-orange/40"
                     type="submit"
                   >
                     Submit

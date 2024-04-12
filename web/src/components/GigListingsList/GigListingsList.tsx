@@ -66,8 +66,8 @@ const ListingItem = ({ listing }) => {
           ))}
         </ul>
       </div>
-      <Button className="h-10" onClick={handleClick} disabled={loading}>
-        {loading ? 'Attending...' : 'Attend'}
+      <Button className="px-10" onClick={handleClick} disabled={loading}>
+        {loading ? 'Adding...' : 'Attend'}
       </Button>
     </li>
   )

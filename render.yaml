@@ -32,10 +32,10 @@ services:
 
   envVars:
   - key: DATABASE_URL
-    fromDatabase:
-      name: musician-booking-app-db
-      property: connectionString
+#     fromDatabase:
+#       name: musician-booking-app-db
+#       property: connectionString
 
-databases:
-  - name: musician-booking-app-db
-    region: oregon
+# databases:
+#   - name: musician-booking-app-db
+#     region: oregon

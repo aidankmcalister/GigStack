@@ -13,13 +13,13 @@ const ATTEND_MUTATION = gql`
   }
 `
 
-const GigListingsList = ({ gigListings }) => {
+const GigListingsList = ({ gigListings, notify }) => {
   return (
     <>
       {gigListings.length > 0 ? (
         <ul className="w-full space-y-3">
           {gigListings.map((listing) => (
-            <ListingItem key={listing.id} listing={listing} />
+            <ListingItem key={listing.id} listing={listing} notify={notify} />
           ))}
         </ul>
       ) : (
@@ -31,14 +31,19 @@ const GigListingsList = ({ gigListings }) => {
 
 export default GigListingsList
 
-const ListingItem = ({ listing }) => {
+const ListingItem = ({ listing, notify }) => {
   const [attend, { loading }] = useMutation(ATTEND_MUTATION, {
     onCompleted: () => {
       console.log('Successfully attended listing!')
+      notify({
+        message: `Attending ${listing.title}.`,
+        type: 'success',
+      })
     },
     onError: (error) => {
       console.error('Error attending listing:', error)
     },
+    refetchQueries: ['AttendingGigsQuery'],
   })
 
   const handleClick = () => {

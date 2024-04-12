@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/24/solid'
 import { helix } from 'ldrs'
+import toast, { Toaster } from 'react-hot-toast'
 import Select from 'react-select'
 import type { GigListingsQuery, GigListingsQueryVariables } from 'types/graphql'
 
@@ -66,6 +67,11 @@ export const Success = ({
   const [sortByNewest, setSortByNewest] = useState(false)
   const [selectedInstruments, setSelectedInstruments] = useState([])
 
+  const notify = ({ message, type }) => {
+    const toastMethod = type ? toast[type] : toast
+    toastMethod(message)
+  }
+
   const handleSort = () => {
     return gigListings.slice().sort((a, b) => {
       const dateA = new Date(a.date).getTime()
@@ -94,6 +100,7 @@ export const Success = ({
 
   return (
     <>
+      <Toaster />
       <div className="flex space-x-3">
         <button
           onClick={toggleSortOrder}
@@ -152,7 +159,7 @@ export const Success = ({
       </div>
 
       {filteredGigListings.length > 0 ? (
-        <GigListingsList gigListings={filteredGigListings} />
+        <GigListingsList gigListings={filteredGigListings} notify={notify} />
       ) : (
         <p className="w-full text-center">No listings yet</p>
       )}

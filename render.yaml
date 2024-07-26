@@ -1,62 +1,30 @@
 services:
-  - name: musician-booking-app-web
-    type: web
-    env: static
-    buildCommand: corepack enable && corepack prepare yarn@4.1.0 --activate && yarn install && yarn rw deploy render web
-    staticPublishPath: ./web/dist
+- name: musician-booking-app-web
+  type: web
+  env: static
+  buildCommand: corepack enable && yarn install && yarn rw deploy render web
+  staticPublishPath: ./web/dist
 
-    routes:
-      - type: rewrite
-        source: /.redwood/functions/*
-        destination: https://musician-booking-app-api.onrender.com/*
-      - type: rewrite
-        source: /*
-        destination: /200.html
+  envVars:
+  # - key: SKIP_INSTALL_DEPS
+    value: true
 
-  - name: musician-booking-app-api
-    type: web
-    plan: free
-    env: node
-    region: oregon
-    buildCommand: |
-      corepack enable
-      corepack prepare yarn@4.1.0 --activate
-      yarn install
-      yarn rw build api
-    startCommand: yarn rw deploy render api
+  routes:
+  - type: rewrite
+    source: /.redwood/functions/*
+    destination: https://musician-booking-app-api.onrender.com/*
+  - type: rewrite
+    source: /*
+    destination: /200.html
 
-    envVars:
-      - key: DATABASE_URL
-        value: your-database-url
+- name: musician-booking-app-api
+  type: web
+  plan: free
+  env: node
+  region: oregon
+  buildCommand: corepack enable && yarn install && yarn rw build api
+  startCommand: yarn rw deploy render api
 
-
-# services:
-# - name: musician-booking-app-web
-#   type: web
-#   env: static
-#   buildCommand: corepack enable && yarn install && yarn rw deploy render web
-#   staticPublishPath: ./web/dist
-
-#   envVars:
-#   - key: SKIP_INSTALL_DEPS
-#     value: true
-
-#   routes:
-#   - type: rewrite
-#     source: /.redwood/functions/*
-#     destination: https://musician-booking-app-api.onrender.com/*
-#   - type: rewrite
-#     source: /*
-#     destination: /200.html
-
-# - name: musician-booking-app-api
-#   type: web
-#   plan: free
-#   env: node
-#   region: oregon
-#   buildCommand: corepack enable && yarn install && yarn rw build api
-#   startCommand: yarn rw deploy render api
-
-#   envVars:
-#   - key: DATABASE_URL
+  envVars:
+  - key: DATABASE_URL
 

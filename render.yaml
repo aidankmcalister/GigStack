@@ -2,11 +2,7 @@ services:
   - name: musician-booking-app-web
     type: web
     env: static
-    buildCommand: |
-      corepack enable
-      corepack prepare yarn@4.1.0 --activate
-      yarn install
-      yarn rw deploy render web
+    buildCommand: corepack enable && corepack prepare yarn@4.1.0 --activate && yarn install && yarn rw deploy render web
     staticPublishPath: ./web/dist
 
     routes:

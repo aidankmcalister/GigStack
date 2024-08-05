@@ -34,7 +34,7 @@ const GigListingsList = ({ gigListings, notify }) => {
 export default GigListingsList
 
 const ListingItem = ({ listing, notify }) => {
-  const { currentUser } = useAuth()
+  const { currentUser, isAuthenticated } = useAuth()
 
   const [attend, { loading }] = useMutation(ATTEND_MUTATION, {
     onCompleted: () => {
@@ -75,15 +75,17 @@ const ListingItem = ({ listing, notify }) => {
           ))}
         </ul>
       </div>
-      <Button className="w-36 px-10" onClick={handleClick} disabled={loading}>
-        {listing.attendees.some((attendee) => attendee.id === currentUser.id)
-          ? loading
-            ? 'Removing...'
-            : 'Stop Attending'
-          : loading
-          ? 'Adding...'
-          : 'Attend'}
-      </Button>
+      {isAuthenticated && (
+        <Button className="w-36 px-10" onClick={handleClick} disabled={loading}>
+          {listing.attendees.some((attendee) => attendee.id === currentUser.id)
+            ? loading
+              ? 'Removing...'
+              : 'Stop Attending'
+            : loading
+            ? 'Adding...'
+            : 'Attend'}
+        </Button>
+      )}
     </li>
   )
 }
